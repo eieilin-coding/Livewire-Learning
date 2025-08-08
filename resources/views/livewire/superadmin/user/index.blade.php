@@ -4,12 +4,12 @@
          <div class="container-fluid">
              <div class="row mb-2">
                  <div class="col-sm-6">
-                     <h1>{{$title}}</h1>
+                     <h1>{{ $title }}</h1>
                  </div>
                  <div class="col-sm-6">
                      <ol class="breadcrumb float-sm-right">
                          <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                         <li class="breadcrumb-item active">{{$title}}</li>
+                         <li class="breadcrumb-item active">{{ $title }}</li>
                      </ol>
                  </div>
              </div>
@@ -24,8 +24,9 @@
              <div class="card-header">
                  <div class="d-flex justify-content-between">
                      <div>
-                         <button wire:click="create" class="btn btn-sm bg-primary" data-toggle="modal" data-target="#createModal">
-                            <i class="fas fa-plus mr-2"></i>Create Data</button>
+                         <button wire:click="create" class="btn btn-sm bg-primary" data-toggle="modal"
+                             data-target="#createModal">
+                             <i class="fas fa-plus mr-2"></i>Create Data</button>
                      </div>
                      <div class="btn-group dropleft">
                          <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown"
@@ -54,7 +55,7 @@
                          </select>
                      </div>
                      <div class="col-6">
-                        <input wire:model.live='search' type="text" class="form-control" placeholder="Search..">
+                         <input wire:model.live='search' type="text" class="form-control" placeholder="Search..">
                      </div>
                  </div>
                  <div class="table-responsive">
@@ -69,9 +70,9 @@
                              </tr>
                          </thead>
                          <tbody>
-                             @foreach ($user as $item)
+                             @foreach ($user as $index => $item)
                                  <tr>
-                                     <td>{{ $item->id }}</td>
+                                     <td>{{ $index + 1 }}</td>
                                      <td>{{ $item->name }}</td>
                                      <td>{{ $item->email }}</td>
                                      @if ($item->role == 'Super Admin')
@@ -80,9 +81,11 @@
                                          <td><span class="badge badge-success">{{ $item->role }}</span></td>
                                      @endif
 
-                                     <td><button class="btn btn-sm bg-warning">
+                                     <td><button wire:click="edit({{ $item->id }})" class="btn btn-sm bg-warning"
+                                             data-toggle="modal" data-target="#editModal">
                                              <i class="fas fa-edit"></i></button>
-                                         <button class="btn btn-sm bg-danger">
+                                         <button wire:click="confirm({{ $item->id }})" class="btn btn-sm bg-danger"
+                                             data-toggle="modal" data-target="#deleteModal">
                                              <i class="fas fa-trash"></i></button>
                                      </td>
                                  </tr>
@@ -98,5 +101,50 @@
 
      </section>
      @include('livewire.superadmin.user.create')
+
+     @script
+         <script>
+             $wire.on('closeCreateModal', () => {
+                 $('#createModal').modal('hide');
+                 Swal.fire({
+                     title: "Success!",
+                     text: "User Create Successfully!",
+                     icon: "success"
+                 });
+             });
+         </script>
+     @endscript
+
+     <!-- Edit Modal --->
+     @include('livewire.superadmin.user.edit')
+
+     @script
+         <script>
+             $wire.on('closeEditModal', () => {
+                 $('#editModal').modal('hide');
+                 Swal.fire({
+                     title: "Success!",
+                     text: "User edited successfully!",
+                     icon: "success"
+                 });
+             });
+         </script>
+     @endscript
+
+     <!--- Delete Modal --->
+     @include('livewire.superadmin.user.delete')
+
+     @script
+         <script>
+             $wire.on('closeDeleteModal', () => {
+                 $('#deleteModal').modal('hide');
+                 Swal.fire({
+                     title: "Success!",
+                     text: "User deleted successfully!",
+                     icon: "success"
+                 });
+             });
+         </script>
+     @endscript
      <!-- /.content -->
  </div>

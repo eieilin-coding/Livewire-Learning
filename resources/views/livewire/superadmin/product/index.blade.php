@@ -20,7 +20,7 @@
             <section class="content">
 
                 <!-- Default box -->
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <div>
@@ -40,8 +40,57 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        Product content
-                    </div>
+
+                 <div class="mb-3 d-flex justify-content-between">
+                     <div class="col-2">
+                         <select wire:model.live="paginate" class="form-control">
+                             <option value="10">10</option>
+                             <option value="20">20</option>
+                             <option value="25">25</option>
+                             <option value="30">30</option>
+                         </select>
+                     </div>
+                     <div class="col-6">
+                         <input wire:model.live='search' type="text" class="form-control" placeholder="Search..">
+                     </div>
+                 </div>
+                 <div class="table-responsive">
+                     <table class="table table-hover">
+                         <thead>
+                             <tr>
+                                 <th>No</th>
+                                 <th>Name</th>
+                                 <th>Email</th>
+                                 <th>Role</th>
+                                 <th><i class="fas fa-cog"></i></th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             @foreach ($user as $index => $item)
+                                 <tr>
+                                     <td>{{ $index+1 }}</td>
+                                     <td>{{ $item->name }}</td>
+                                     <td>{{ $item->email }}</td>
+                                     @if ($item->role == 'Super Admin')
+                                         <td><span class="badge badge-info">{{ $item->role }}</span></td>
+                                     @elseif($item->role == 'Admin')
+                                         <td><span class="badge badge-success">{{ $item->role }}</span></td>
+                                     @endif
+
+                                     <td><button wire:click="edit({{ $item->id }})" class="btn btn-sm bg-warning"
+                                             data-toggle="modal" data-target="#editModal">
+                                             <i class="fas fa-edit"></i></button>
+                                         <button wire:click="confirm({{ $item->id }})" class="btn btn-sm bg-danger"
+                                             data-toggle="modal" data-target="#deleteModal">
+                                             <i class="fas fa-trash"></i></button>
+                                     </td>
+                                 </tr>
+                             @endforeach
+                         </tbody>
+                     </table>
+                     <div>{{ $user->links() }}</div>
+                 </div>
+             </div> --}}
                    
                 </div>
                 <!-- /.card -->
