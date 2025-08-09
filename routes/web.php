@@ -5,9 +5,11 @@ use App\Livewire\Users\UserAdd;
 use App\Livewire\Users\UserDetail;
 use App\Livewire\Users\UserList;
 use App\Exports\UserExport;
+use App\Http\Controllers\UserController;
 use Maatwebsite\Excel\Facades\Excel;
 
 Route::view('/', 'welcome');
+
 
 Route::get('/users', UserList::class);
 Route::get('/users/view/{id}', UserDetail::class);
@@ -34,7 +36,9 @@ Route::get('superadmin/user/excel', function () {
     return Excel::download(new UserExport, 'DataUser_'.$filename.'.xlsx');
 })->name('superadmin.user.excel');
 
-
-
+Route::get('superadmin/user/pdf', [UserController::class,'pdf'])
+->name('userPdf');
 
 require __DIR__.'/auth.php';
+
+
