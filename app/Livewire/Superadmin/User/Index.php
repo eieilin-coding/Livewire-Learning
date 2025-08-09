@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\WithPagination;
+use App\Exports\UserExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Index extends Component
 {

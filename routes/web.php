@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Users\UserAdd;
 use App\Livewire\Users\UserDetail;
 use App\Livewire\Users\UserList;
+use App\Exports\UserExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 Route::view('/', 'welcome');
 
@@ -26,6 +28,12 @@ Route::view('superadmin/category/index','superadmin.category.index')->name('supe
 
 Route::view('superadmin/product/index','superadmin.product.index')->name('superadmin.product.index');
 Route::view('admin/product/index','admin.product.index')->name('admin.product.index');
+
+Route::get('superadmin/user/excel', function () {
+    $filename = now()->format('d-m-Y_H.i.s');
+    return Excel::download(new UserExport, 'DataUser_'.$filename.'.xlsx');
+})->name('superadmin.user.excel');
+
 
 
 

@@ -31,7 +31,7 @@ class Index extends Component
 
     public function store() {
         $this->validate([
-            'name' => 'required',            
+            'name' => 'required|unique:categories,name'           
         ], 
         ['name.required' => 'The name is required.',]
     );
@@ -54,7 +54,7 @@ class Index extends Component
         $category = Category::findOrFail($id);
 
          $this->validate([
-            'name' => 'required'
+            'name' => 'required|unique:categories,name,'.$id ,
         ], 
         ['name.required' => 'The name is required.',     
         ]

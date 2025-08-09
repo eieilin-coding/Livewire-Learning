@@ -34,7 +34,7 @@
                              <i class="fas fa-print mr-1"></i>Print
                          </button>
                          <div class="dropdown-menu ">
-                             <a href="#" class="dropdown-item text-success"><i
+                             <a href="{{ route('superadmin.user.excel')}}" class="dropdown-item text-success"><i
                                      class="fas fa-file-excel mr-1"></i>Excel</a>
                              <a href="#" class="dropdown-item text-danger"><i
                                      class="fas fa-file-pdf mr-1"></i>Pdf</a>
